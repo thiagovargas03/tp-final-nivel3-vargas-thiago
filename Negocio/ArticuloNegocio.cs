@@ -12,7 +12,7 @@ namespace Negocio
     public class ArticuloNegocio
     {
 
-        public List<Articulos> listar()
+        public List<Articulos> listar(string id = "")
 
         {
             List<Articulos> lista = new List<Articulos>();
@@ -25,6 +25,8 @@ namespace Negocio
                 conexion.ConnectionString = "server=.\\SQLEXPRESS; database=CATALOGO_WEB_DB; integrated security=true";
                 comando.CommandType = System.Data.CommandType.Text;
                 comando.CommandText = "Select Codigo,Nombre,A.Descripcion,M.Descripcion Marca,C.Descripcion Categoria,ImagenUrl,Precio,A.IdMarca,A.IdCategoria,A.Id from ARTICULOS A, MARCAS M,CATEGORIAS C Where M.Id = A.IdMarca AND C.Id = A.IdCategoria";
+                if (id != "")
+                    comando.CommandText += " and A.Id = " + id;
                 comando.Connection = conexion;
 
 
