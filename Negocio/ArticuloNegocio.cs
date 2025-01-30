@@ -106,8 +106,8 @@ namespace Negocio
                     lista.Add(aux);
                 }
 
-                    return lista;
-                }
+                return lista;
+            }
             catch (Exception ex)
             {
                 throw ex;
@@ -122,6 +122,39 @@ namespace Negocio
             try
             {
                 datos.setearConsulta("UPDATE ARTICULOS SET Codigo = @codigo , Nombre = @nombre, Descripcion = @desc,ImagenUrl=@img,Precio=@precio,IdMarca=@idMarca,IdCategoria=@idCategoria WHERE Id = @id ");
+                datos.setearParametro("@codigo", modificar.Codigo);
+                datos.setearParametro("@nombre", modificar.Nombre);
+                datos.setearParametro("@desc", modificar.Descripcion);
+                datos.setearParametro("@img", modificar.ImagenUrl);
+                datos.setearParametro("@precio", modificar.Precio);
+                datos.setearParametro("@idMarca", modificar.Marca.Id);
+                datos.setearParametro("@idCategoria", modificar.Categoria.Id);
+                datos.setearParametro("@id", modificar.Id);
+
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+
+                datos.cerrarConexion();
+
+            }
+
+
+
+        }
+        public void modificarConSp(Articulos modificar)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearSp("storedModificarArticulo");
                 datos.setearParametro("@codigo", modificar.Codigo);
                 datos.setearParametro("@nombre", modificar.Nombre);
                 datos.setearParametro("@desc", modificar.Descripcion);
@@ -177,6 +210,33 @@ namespace Negocio
             }
 
 
+
+        }
+        public void agregarConSp(Articulos nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearSp("AltaArticulo");
+                datos.setearParametro("@codigo", nuevo.Codigo);
+                datos.setearParametro("@nombre", nuevo.Nombre);
+                datos.setearParametro("@desc", nuevo.Descripcion);
+                datos.setearParametro("@img", nuevo.ImagenUrl);
+                datos.setearParametro("@precio", nuevo.Precio);
+                datos.setearParametro("@idMarca", nuevo.Marca.Id);
+                datos.setearParametro("@idCategoria", nuevo.Categoria.Id);
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
 
         }
 
