@@ -270,7 +270,7 @@ namespace Negocio
             try
             {
                 string consulta = "Select Codigo,Nombre,A.Descripcion,M.Descripcion Marca,C.Descripcion Categoria,ImagenUrl,Precio,A.IdMarca,A.IdCategoria,A.Id from ARTICULOS A, MARCAS M,CATEGORIAS C Where M.Id = A.IdMarca AND C.Id = A.IdCategoria AND ";
-                if (campo == "Numero")
+                if (campo == "Precio")
                 {
                     switch (criterio)
                     {
