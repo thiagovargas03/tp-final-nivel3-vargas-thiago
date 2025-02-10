@@ -13,6 +13,11 @@ namespace TpFinalNivel3
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Seguridad.esAdmin(Session["usuario"]))
+            {
+                Session.Add("error", "Se requieren permisos especiales");
+                Response.Redirect("Error.aspx");
+            }
             ArticuloNegocio negocio = new ArticuloNegocio();
             Session.Add("listaArticulos", negocio.listarConSp());
             dgvArticulos.DataSource = Session["listaArticulos"];

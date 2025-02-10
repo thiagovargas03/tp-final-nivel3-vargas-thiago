@@ -47,5 +47,25 @@ namespace Negocio
 
             }
         }
+
+        public int insertarNuevo(Usuario nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearSp("insertarNuevo");
+                datos.setearParametro("@email", nuevo.Email);
+                datos.setearParametro("@pass", nuevo.Pass);
+                return datos.ejecutarAccionScalar();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
