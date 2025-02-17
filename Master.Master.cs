@@ -14,11 +14,11 @@ namespace TpFinalNivel3
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!(Page is MenuLogin || Page is Registro || Page is Home || Page is Error))
+            if (!(Page is MenuLogin || Page is Registro || Page is Home || Page is Error || Page is Favoritos))
             {
                 if (!Seguridad.sesionActiva(Session["usuario"]))
                 {
-                    Response.Redirect("MenuLogin.aspx", false);
+                    Response.Redirect("Login.aspx", false);
                 }
                 else
                 {
@@ -28,6 +28,11 @@ namespace TpFinalNivel3
                         imgPerfil.ImageUrl = "~/Images/" + user.UrlImagen;
                     }
                 }
+            }
+
+            if (Seguridad.sesionActiva(Session["usuario"]))
+            {
+                imgPerfil.ImageUrl = "~/Images/" + ((Usuario)Session["usuario"]).UrlImagen;
             }
         }
 

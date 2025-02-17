@@ -24,9 +24,23 @@ namespace TpFinalNivel3
             }
         }
 
-        protected void btnDetalle_Click(object sender, EventArgs e)
+        protected void btnFavorito_Click(object sender, EventArgs e)
         {
+            Button btn = (Button)sender;
             string val = ((Button)sender).CommandArgument;
+            int idProducto = int.Parse(val);
+            FavoritosNegocio negocio = new FavoritosNegocio();  
+            if (!(Seguridad.sesionActiva(Session["usuario"])))
+            {
+                Response.Redirect("Login.aspx");
+            }
+            else {
+                int idUsuario = ((Usuario)Session["usuario"]).Id;
+                negocio.agregarFavorito(idUsuario, idProducto);
+                btn.CssClass = "btn btn-success rounded-circle p-0";
+            }
+           
+            
         }
     }
 }
